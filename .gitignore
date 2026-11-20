@@ -1,0 +1,6 @@
+node_modules/
+packages/
+_site/
+test-results/
+*.log
+.env

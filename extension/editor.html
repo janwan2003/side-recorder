@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tapeline</title>
+<link rel="icon" href="icons/icon-32.png">
+<link rel="stylesheet" href="editor.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><img src="icons/icon-32.png" alt="" width="22" height="22"><span>Tapeline</span></div>
+  <input id="projectName" class="project-name" aria-label="Project name" spellcheck="false">
+  <div class="spacer"></div>
+  <div class="group" role="toolbar" aria-label="File">
+    <button id="newProject" class="btn ghost" title="Start a new project">New</button>
+    <button id="openProject" class="btn ghost" title="Open a .side project file">Open</button>
+    <button id="saveProject" class="btn ghost" title="Save the project as a .side file (Ctrl+S)">Save</button>
+    <button id="exportCode" class="btn ghost" title="Export as Playwright, WebDriver or Cypress code">Export code</button>
+  </div>
+  <input id="fileInput" type="file" accept=".side,application/json" hidden>
+</header>
+
+<div class="runbar">
+  <button id="record" class="btn record" title="Record clicks and typing in the test page"><span class="dot"></span><span class="label">Record</span></button>
+  <button id="play" class="btn primary" title="Run the current test"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>Run test</button>
+  <button id="playAll" class="btn" title="Run every test in the project">Run all</button>
+  <button id="playFrom" class="btn" title="Run the current test from the selected step">From step</button>
+  <button id="stop" class="btn" title="Stop" disabled><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3.5" width="9" height="9" rx="1"/></svg>Stop</button>
+  <label class="speed" title="Delay between steps">Speed
+    <select id="speed"><option value="0">Fast</option><option value="300">Medium</option><option value="1000">Slow</option></select>
+  </label>
+  <div class="spacer"></div>
+  <label class="baseurl">Base URL <input id="baseUrl" type="url" placeholder="https://example.com" spellcheck="false"></label>
+</div>
+
+<main class="layout">
+  <aside class="sidebar" aria-label="Tests">
+    <div class="side-head"><h2>Tests</h2><button id="addTest" class="icon-btn" title="Add a test" aria-label="Add a test">+</button></div>
+    <ul id="testList" class="test-list"></ul>
+    <div class="side-foot" id="projectStats"></div>
+  </aside>
+
+  <section class="content">
+    <div class="test-head">
+      <input id="testName" class="test-name" aria-label="Test name" spellcheck="false">
+      <div class="test-actions">
+        <button id="addStep" class="btn small" title="Insert a step after the selected one">+ Step</button>
+        <button id="moveUp" class="btn small" title="Move step up" aria-label="Move step up">↑</button>
+        <button id="moveDown" class="btn small" title="Move step down" aria-label="Move step down">↓</button>
+        <button id="toggleStep" class="btn small" title="Disable or enable the step (kept as // in the file)">Disable</button>
+        <button id="deleteStep" class="btn small danger" title="Delete the selected step (Del)">Delete</button>
+      </div>
+    </div>
+    <div class="table-wrap" id="tableWrap" tabindex="0">
+      <table class="steps" aria-label="Steps">
+        <thead><tr><th class="c-n">#</th><th class="c-cmd">Command</th><th>Target</th><th>Value</th></tr></thead>
+        <tbody id="steps"></tbody>
+      </table>
+      <div id="emptyState" class="empty" hidden>
+        <p class="empty-title">No steps yet</p>
+        <p>Enter a base URL and press <b>Record</b>, then click and type in the page. Each action becomes a step.<br>Or <button class="link" id="emptyOpen">open a .side file</button>.</p>
+      </div>
+    </div>
+
+    <form id="stepForm" class="step-form" autocomplete="off">
+      <div class="field cmd">
+        <label for="fCommand">Command</label>
+        <input id="fCommand" list="commandList" spellcheck="false">
+        <datalist id="commandList"></datalist>
+      </div>
+      <div class="field target">
+        <label for="fTarget">Target</label>
+        <div class="row">
+          <input id="fTarget" spellcheck="false">
+          <select id="fTargets" title="Other locators recorded for this element" aria-label="Other recorded locators"></select>
+          <button type="button" id="pick" class="btn small" title="Click an element in the page to use as the target">Pick</button>
+          <button type="button" id="find" class="btn small" title="Highlight the target in the page">Find</button>
+        </div>
+      </div>
+      <div class="field value">
+        <label for="fValue">Value</label>
+        <input id="fValue" spellcheck="false">
+      </div>
+      <div class="field comment">
+        <label for="fComment">Comment</label>
+        <input id="fComment" spellcheck="false">
+      </div>
+      <p id="cmdHelp" class="help"></p>
+    </form>
+
+    <section class="log" aria-label="Log">
+      <div class="log-head"><h2>Log</h2><span id="summary" class="summary"></span><button id="clearLog" class="btn small ghost">Clear</button></div>
+      <ol id="log" class="log-list"></ol>
+    </section>
+  </section>
+</main>
+
+<dialog id="exportDialog" class="modal">
+  <form method="dialog" class="modal-inner">
+    <div class="modal-head">
+      <h2>Export code</h2>
+      <button class="icon-btn" value="close" aria-label="Close">×</button>
+    </div>
+    <div class="modal-controls">
+      <label>Framework <select id="exportLang"></select></label>
+      <label>Tests <select id="exportScope"><option value="test">This test</option><option value="all">All tests</option></select></label>
+    </div>
+    <pre id="exportOut" class="code" tabindex="0"></pre>
+    <div class="modal-foot">
+      <span class="hint">Steps that cannot be converted are kept as TODO comments.</span>
+      <button type="button" id="copyExport" class="btn">Copy</button>
+      <button type="button" id="downloadExport" class="btn primary">Download</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script type="module" src="editor.js"></script>
+</body>
+</html>

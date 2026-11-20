@@ -1,0 +1,16 @@
+{
+  "name": "tapeline",
+  "private": true,
+  "type": "module",
+  "description": "Tapeline: record and replay browser tests, open and save .side projects, export code.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test --test-concurrency=1 \"tests/*.test.mjs\"",
+    "icons": "node scripts/make-icons.mjs",
+    "pack": "node scripts/pack-extension.mjs",
+    "build:site": "node scripts/build-site.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "1.65.1"
+  }
+}
