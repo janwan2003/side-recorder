@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tapeline: record and replay browser tests, open .side files</title>
+<meta name="description" content="A free, open-source browser extension that records clicks and typing as test steps, replays them, opens and saves .side projects, and exports Playwright, Selenium WebDriver and Cypress code. No account.">
+<link rel="canonical" href="https://janwan2003.github.io/side-recorder/">
+<meta property="og:title" content="Tapeline: record and replay browser tests">
+<meta property="og:description" content="Opens your .side test projects in the browser again. Record, replay, export to Playwright. Free, open source, no account.">
+<meta property="og:image" content="https://janwan2003.github.io/side-recorder/editor.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="icon-128.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--#head-->
+<main>
+  <section class="hero"><div class="wrap">
+    <h1>Record browser tests. Open your <code>.side</code> projects again.</h1>
+    <p class="lead">Tapeline is a free browser extension that records your clicks and typing as test steps, replays them with automatic waits, and opens and saves <code>.side</code> project files. When a test is ready, export it to Playwright, Selenium WebDriver or Cypress code. No account, no server: your tests stay on your computer.</p>
+    <div class="cta">
+      <a class="button primary" href="https://github.com/janwan2003/side-recorder/releases/latest">Download the extension</a>
+      <a class="button" href="./convert.html">Convert a .side file to code</a>
+      <span class="note">For Chrome, Edge and other Chromium browsers. Store listings are on the way; until then, install the download with "Load unpacked".</span>
+    </div>
+    <div class="shot"><img src="editor.png" width="1280" height="800" alt="The Tapeline editor: a list of recorded steps, a failed assertion with its reason, the step editor and the run log."></div>
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <h2>Everything a recorder needs, nothing to sign up for</h2>
+    <div class="grid">
+      <div class="card"><h3>Opens .side projects</h3><p>Open the test projects your team already has. Steps, comments, suites and unknown fields are kept, so saving gives back the same file.</p></div>
+      <div class="card"><h3>Records real actions</h3><p>Clicks, typing, drop-downs, checkboxes and Enter become readable steps. Right-click any element to add an assertion.</p></div>
+      <div class="card"><h3>Locators that survive</h3><p>Prefers <code>data-testid</code>, ids and names over brittle paths, records several locators per element, and falls back to them when one breaks, with a warning.</p></div>
+      <div class="card"><h3>Replays with waits</h3><p>Waits for elements and retries assertions briefly, so tests do not fail because a page was still loading.</p></div>
+      <div class="card"><h3>Control flow and variables</h3><p><code>if</code>, <code>while</code>, <code>times</code>, <code>forEach</code>, <code>do</code>/<code>repeatIf</code>, <code>store</code>, <code>executeScript</code>, <code>run</code> and dialog checks, as in your existing files.</p></div>
+      <div class="card"><h3>Exports real code</h3><p>Playwright Test, Selenium WebDriver for Python, Java and JavaScript, and Cypress. Free, with anything that cannot convert left as a clear TODO.</p></div>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <h2>Questions</h2>
+    <dl class="faq">
+      <dt>Is this Selenium IDE?</dt>
+      <dd>No. Tapeline is an independent project written from scratch. It reads and writes the same open <code>.side</code> JSON format, so projects move between the tools.</dd>
+      <dt>Why do I need it?</dt>
+      <dd>The old Selenium IDE browser extension was built on Manifest V2, which Chrome no longer runs. Tapeline is a Manifest V3 extension, so it installs in current Chrome.</dd>
+      <dt>Does it send my tests anywhere?</dt>
+      <dd>No. Tapeline makes no network requests of its own and has no account. Projects are kept in the extension's local storage and in files you save. See the <a href="./privacy.html">privacy policy</a>.</dd>
+      <dt>Which commands are supported?</dt>
+      <dd>Clicks, typing, keys, selections, mouse events, waits, assertions and verifications, variables, scripts, control flow, dialogs and running another test. Switching into iframes and between windows is not supported in replay yet; those steps are kept in the file and exported to code.</dd>
+      <dt>What does it cost?</dt>
+      <dd>Nothing. It is MIT-licensed open source.</dd>
+    </dl>
+  </div></section>
+</main>
+<!--#foot-->
+</body>
+</html>

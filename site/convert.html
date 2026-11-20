@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convert .side to Playwright, WebDriver or Cypress code - Tapeline</title>
+<meta name="description" content="Convert a .side test project to Playwright Test, Selenium WebDriver (Python, Java, JavaScript) or Cypress code, in your browser. Free, no upload, no sign-up.">
+<link rel="canonical" href="https://janwan2003.github.io/side-recorder/convert.html">
+<meta property="og:title" content=".side to Playwright, WebDriver or Cypress converter">
+<meta property="og:description" content="Paste or drop a .side project and get test code. Runs in your browser; nothing is uploaded.">
+<meta property="og:image" content="https://janwan2003.github.io/side-recorder/editor.png">
+<link rel="icon" href="icon-128.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--#head-->
+<main class="wrap">
+  <section class="hero" style="padding-bottom:0">
+    <h1>Convert a <code>.side</code> file to code</h1>
+    <p class="lead">Turn a recorded test project into Playwright Test, Selenium WebDriver (Python, Java, JavaScript) or Cypress code. It runs in your browser: the file is not uploaded.</p>
+  </section>
+  <div class="converter">
+    <div class="panel">
+      <div id="drop" class="drop" tabindex="0" role="button" aria-label="Choose a .side file">
+        <b>Drop a .side file here</b><br>or click to choose one
+      </div>
+      <input id="file" type="file" accept=".side,application/json" hidden>
+      <p class="note" style="margin:10px 0 0">No file to hand? <button id="sample" class="button" style="padding:4px 10px;font-size:14px">Try a sample</button></p>
+      <label for="lang">Framework</label>
+      <select id="lang"></select>
+      <label for="which">Tests</label>
+      <select id="which"><option value="all">All tests</option></select>
+      <p id="err" class="err" role="alert"></p>
+      <p id="stats" class="note"></p>
+    </div>
+    <div class="out">
+      <div class="bar"><span id="fname" class="file">Choose a file to see its code</span><button id="copy" class="button" disabled>Copy</button><button id="download" class="button primary" disabled>Download</button></div>
+      <pre id="code" tabindex="0" aria-label="Generated code"></pre>
+    </div>
+  </div>
+  <section class="block" style="border-top:0;padding-top:0">
+    <h2>How the conversion works</h2>
+    <p class="note">Each step becomes the equivalent call: <code>open</code> becomes a page visit, <code>click</code> a click, <code>type</code> a fill, assertions become the framework's checks, and <code>if</code>/<code>while</code>/<code>times</code>/<code>forEach</code> become real loops and conditions. Locators like <code>id=</code>, <code>name=</code>, <code>css=</code>, <code>xpath=</code> and <code>linkText=</code> map to the framework's own. Steps with no equivalent stay in the code as TODO comments, so nothing is lost silently. To record new tests and replay them in the browser, <a href="./">get the Tapeline extension</a>.</p>
+  </section>
+</main>
+<!--#foot-->
+<script type="module" src="convert.js"></script>
+</body>
+</html>

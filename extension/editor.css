@@ -121,6 +121,7 @@ h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: v
 .steps tr.skipped td.n::after { content: ' –'; }
 .steps tr .note { display: block; font-family: inherit; font-size: 11px; color: var(--red); white-space: normal; margin-top: 2px; }
 .steps tr.warning .note { color: var(--amber); }
+.steps tr.passed .note { color: var(--muted); }
 .steps tr .comment { display: block; font-family: inherit; font-weight: 400; color: var(--muted); font-size: 11px; white-space: normal; }
 .steps td.indent-cell { padding-left: calc(10px + var(--indent, 0) * 14px); }
 .empty { position: absolute; inset: 40px 0 0; display: grid; place-content: center; text-align: center; color: var(--muted); padding: 20px; }

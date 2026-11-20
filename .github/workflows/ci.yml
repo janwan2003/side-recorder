@@ -1,0 +1,20 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npx playwright-core install --with-deps chromium
+      - run: node --test --test-concurrency=1 tests/lib.test.mjs tests/site.test.mjs
+      - name: End-to-end extension tests (headless Chromium needs a display for extensions)
+        run: xvfb-run -a node --test tests/extension.test.mjs
